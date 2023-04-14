@@ -10,7 +10,7 @@ bool Image::loadMedia(const char* path)
 	gHelloWorld = SDL_LoadBMP(path);
 	if (!gHelloWorld)
 	{
-		printf("Unable to load image %s! SDL Error: %s\n", "02_getting_an_image_on_the_screen/hello_world.bmp", SDL_GetError());
+		printf("Unable to load image %s! SDL Error: %s\n", "img/hello_world.bmp", SDL_GetError());
 		success = false;
 	}
 	return success;

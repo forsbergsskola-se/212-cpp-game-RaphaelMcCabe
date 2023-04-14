@@ -23,7 +23,7 @@ int main(int argc, char* args[])
 	}
 
 	//Load media
-	Image image{"img / hello_world.bmp"};
+	Image image{"img/hello_world.bmp"};
 	if (!image.wasSuccessful())
 	{
 		printf("Failed to load media!\n");
