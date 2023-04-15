@@ -14,7 +14,23 @@ and may not be redistributed without written permission.*/
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
+/*
+you just load the dog image
+it says what animal is this?
+you check the input
+   if it is a letter
+      add the letter to your string
+	  create a text from the string (font tutorial)
+	  render the text to the window
+  if it is return
+      compare the string to std::string{"dog"}. if it is the same
+	      show image: congrats
+		  (or just change the string to "Congrats"!
+	  if it is not
+	      show image: failllll
+		  (or just change the string to "Fail"!
 
+*/
 const std::map<SDL_KeyCode, const char*> surfaceMap{
 	{SDL_KeyCode::SDLK_UP, "img/up.bmp"},
 	{SDL_KeyCode::SDLK_DOWN, "img/down.bmp"},
@@ -44,9 +60,12 @@ int main(int argc, char* args[])
 		printf("Failed to load media!\n");
 		return -1;
 	}
-	//Hack to get window to stay up
+	
 	SDL_Event e; bool quit = false;
+	
+	
 	std::string userInput{};
+	
 	while (quit == false)
 	{
 		while (SDL_PollEvent(&e))
