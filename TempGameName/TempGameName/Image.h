@@ -3,19 +3,17 @@
 class Image
 {
 	//The image we will load and show on the screen
-	SDL_Surface* gHelloWorld{};
-	bool loadMedia(const char* path);
+	SDL_Surface* imageSurface{};
 	bool success;
 	public:
 public:
-	Image(const char* path){
-		success = loadMedia(path);
-	}
+	Image(const char* path);
 	~Image();
+	SDL_Rect rect { 0, 0, 320, 240 };
 	bool wasSuccessful() { return success; }
 	SDL_Surface* getResource()
 	{
-		return gHelloWorld;
+		return imageSurface;
 	}
 };
 

@@ -5,12 +5,14 @@ Image::Image(const char* path) : success{}
 {
 
 	//Load splash image
-	gHelloWorld = SDL_LoadBMP(path);
-	if (!gHelloWorld)
+	auto tmpSurface = SDL_LoadBMP(path);
+	if (!tmpSurface)
 	{
 		printf("Unable to load image %s! SDL Error: %s\n", path, SDL_GetError());
 		return;
 	}
+
+	imageSurface = tmpSurface; // SDL_CreateTextureFromSurface
 	
 	success = true;
 }
@@ -18,6 +20,6 @@ Image::Image(const char* path) : success{}
 Image::~Image()
 {
 	//Deallocate surface
-	SDL_FreeSurface(gHelloWorld);
-	gHelloWorld = nullptr;
+	//SDL_FreeSurface(imageSurface);
+	//imageSurface = nullptr;
 }
