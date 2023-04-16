@@ -2,6 +2,7 @@
 #include <cstdio>
 #include <SDL.h>
 #include <SDL_ttf.h>
+#include "TextRender.h"
 
 Window::Window(int width, int height) : success{}
 {
@@ -35,6 +36,14 @@ Window::~Window()
 }
 
 void Window::render(Image& image)
+{
+	//Apply the image
+	SDL_BlitScaled(image.getResource(), nullptr, screenSurface, &image.rect);
+	//Update the surface
+	SDL_UpdateWindowSurface(window);
+}
+
+void Window::render(TextRenderer& image)
 {
 	//Apply the image
 	SDL_BlitScaled(image.getResource(), nullptr, screenSurface, &image.rect);

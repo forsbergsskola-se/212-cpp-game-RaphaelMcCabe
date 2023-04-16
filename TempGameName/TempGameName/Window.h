@@ -2,6 +2,8 @@
 #include <SDL.h>
 #include "Image.h"
 
+extern class TextRenderer;
+
 class Window
 {
 	//The window we'll be rendering to
@@ -15,5 +17,6 @@ public:
 	~Window();
 	bool wasSuccessful() {return success;}
 	void render(Image& image);
+	void render(TextRenderer& image);
 };
 
