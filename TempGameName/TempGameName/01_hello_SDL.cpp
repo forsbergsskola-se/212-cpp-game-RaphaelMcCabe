@@ -73,6 +73,10 @@ int main(int argc, char* args[])
 	TextRenderer renderer{};
 	renderer.gFont = TTF_OpenFont("font/zesty_ahh_font.ttf", 28);; // TODO LOAD FONT
 	renderer.loadFromRenderedText(userInput, textColor);
+
+	
+
+	
 	while (quit == false)
 	{
 		while (SDL_PollEvent(&e))
