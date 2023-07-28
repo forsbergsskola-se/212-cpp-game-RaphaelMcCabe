@@ -16,6 +16,13 @@ Image::Image(const char* path) : success{}
 	
 	success = true;
 }
+Image::Image(SDL_Surface* surface)
+{
+	imageSurface = surface;
+	this->rect.w = surface->w;
+	this->rect.h = surface->h;
+	success = true;
+}
 
 Image::~Image()
 {

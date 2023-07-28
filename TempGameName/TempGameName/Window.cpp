@@ -35,10 +35,14 @@ Window::~Window()
 	SDL_Quit();
 }
 
-void Window::render(Image& image)
+void Window::render(Image* image)
 {
+	if (image->rect.w <1)
+	{
+		printf("warning image has a width of %d and will not be visable", image->rect.w);
+	}
 	//Apply the image
-	SDL_BlitScaled(image.getResource(), nullptr, screenSurface, &image.rect);
+	SDL_BlitScaled(image->getResource(), nullptr, screenSurface, &image->rect);
 	//Update the surface
 	SDL_UpdateWindowSurface(window);
 }

@@ -10,7 +10,7 @@ and may not be redistributed without written permission.*/
 #include <string>
 #include <SDL_ttf.h>
 #include "TextRender.h"
-
+#include "Font.h"
 
 
 //Screen dimension constants
@@ -56,6 +56,13 @@ int main(int argc, char* args[])
 		return -1;
 	}
 
+	//Initialize SDL_ttf
+	if( TTF_Init() == -1 )
+	{
+		printf( "SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError() );
+		return -1;
+	}
+
 	//Load media
 	Image image{ fallbackSurface };
 	if (!image.wasSuccessful())
@@ -63,6 +70,9 @@ int main(int argc, char* args[])
 		printf("Failed to load media!\n");
 		return -1;
 	}
+
+	Font font{"font/zesty_ahh_font.ttf", 28};
+	auto text = font.createText("balls", window.renderer);
 
 	SDL_Event e; bool quit = false;
 	
@@ -99,10 +109,12 @@ int main(int argc, char* args[])
 			}
 			case SDL_TEXTINPUT: {
 				userInput += e.text.text;
+					text = font.createText(userInput.c_str(), window.renderer);
 			}break;
 			}
 			window.render(renderer);
-			window.render(image);
+			window.render(&image);
+			window.render(text.get());
 		}
 	}
 	return 0;
