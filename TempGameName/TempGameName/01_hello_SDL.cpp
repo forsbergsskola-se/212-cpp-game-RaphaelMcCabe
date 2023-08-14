@@ -11,15 +11,20 @@ and may not be redistributed without written permission.*/
 #include "TextRender.h"
 #include "Font.h"
 
-
 //Screen dimension constants
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
 const char* fallbackSurface{ "img/dog.bmp" };
 
+void Reset(Image& image, std::unique_ptr<Image>& text, Font& font, Window& window, bool& hasWon);
+
+bool CheckWinCondition(const std::string userInput);
+
 int main(int argc, char* args[])
 {
+	bool hasWon = false;
+	
 	Window window{ SCREEN_WIDTH, SCREEN_HEIGHT };
 	//Start up SDL and create window
 	if (!window.wasSuccessful())
@@ -53,8 +58,9 @@ int main(int argc, char* args[])
 	SDL_Color textColor = { 50, 50, 50 };
 
 	TextRenderer renderer{};
-	renderer.gFont = TTF_OpenFont("font/zesty_ahh_font.ttf", 28);; // TODO LOAD FONT
+	renderer.gFont = TTF_OpenFont("font/zesty_ahh_font.ttf", 28); // TODO LOAD FONT
 	renderer.loadFromRenderedText(userInput, textColor);
+	
 	
 	while (quit == false)
 	{
@@ -66,12 +72,20 @@ int main(int argc, char* args[])
 			} break;
 			case SDL_KEYDOWN: {
 				if (e.key.keysym.sym == SDL_KeyCode::SDLK_RETURN) {
-					printf("%s", userInput.c_str());
-					if (userInput.compare("dog") == 0 || userInput.compare("Dog") == 0) {
+					if (CheckWinCondition(userInput)) {
 						image = Image{ "img/press.bmp" };
+						hasWon = true;
+						text = font.createText("Press Backspace to Reset", window.renderer);
 					}
 					userInput.clear();
 				}
+					if (e.key.keysym.sym == SDLK_BACKSPACE)
+					{
+						if (hasWon == true)
+						{
+							Reset(image, text, font, window, hasWon);
+						}
+					}
 				else {
 					
 				} break;
@@ -87,4 +101,19 @@ int main(int argc, char* args[])
 		}
 	}
 	return 0;
+}
+void Reset(Image& image, std::unique_ptr<Image>& text, Font& font, Window& window, bool& hasWon)
+{
+	image = fallbackSurface;
+	text = font.createText("What animal is this", window.renderer);
+	hasWon = false;
+}
+
+bool CheckWinCondition(const std::string userInput)
+{
+	if (userInput.compare("dog") == 0 || userInput.compare("Dog") == 0)
+	{
+		return true;
+	}
+	return false;
 }
