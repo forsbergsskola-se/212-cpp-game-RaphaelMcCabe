@@ -1,7 +1,6 @@
 #include "Window.h"
 #include <cstdio>
 #include <SDL.h>
-#include <SDL_ttf.h>
 #include "TextRender.h"
 
 Window::Window(int width, int height) : success{}
@@ -54,22 +53,3 @@ void Window::render(TextRenderer& image)
 	//Update the surface
 	SDL_UpdateWindowSurface(window);
 }
-
-
-// STEP 1: Follow Font Tutorial
-// https://lazyfoo.net/tutorials/SDL/16_true_type_fonts/index.php
-// CHeck out how I added SDL2_Image to the project on Loom (From Surface to Texture)
-// do the text tutorial, but only do SDL_Surface* textSurface = TTF_RenderText_Solid( gFont, textureText.c_str(), textColor );
-// do not create a texture
-// instead
-
-
-
-// try to include xxx.h > project settings: additional include directory > additional library directory > linker input (.lib) > dll copy
-
-
-// NOT NECESSARY:
-// DO NOT DO: Switch to Textures (Chapter 7)
-// Window constructor: CreateRenderer insteade of GetWindowSurface
-// Window render: replace SDL_BLitSurface with SDL_RenderCOpy and SDL_UPdateWIndowSUrface with SDL_RenderPResent
-// Image: replace imageSurface with newTexture SDL_CreateTextureFromSurface

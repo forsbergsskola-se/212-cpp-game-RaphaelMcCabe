@@ -1,9 +1,7 @@
 #include "Font.h"
-#include "Window.h"
 #include <cstdio>
 #include <SDL.h>
 #include <SDL_ttf.h>
-#include "TextRender.h"
 #include "Image.h"
 
 
